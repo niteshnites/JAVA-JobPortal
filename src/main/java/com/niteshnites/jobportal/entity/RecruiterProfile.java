@@ -3,22 +3,19 @@ package com.niteshnites.jobportal.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="recruiter_profile")
+@Table(name = "recruiter_profile")
 public class RecruiterProfile {
 
     @Id
     private int userAccountId;
 
     @OneToOne
-    @JoinColumn(name="user_account_id")
+    @JoinColumn(name = "user_account_id")
     @MapsId
     private Users userId;
 
-
     private String firstName;
-
     private String lastName;
-
     private String city;
 
     private String state;
@@ -45,7 +42,7 @@ public class RecruiterProfile {
         this.profilePhoto = profilePhoto;
     }
 
-    public RecruiterProfile(Users users){
+    public RecruiterProfile(Users users) {
         this.userId = users;
     }
 
@@ -119,6 +116,12 @@ public class RecruiterProfile {
 
     public void setProfilePhoto(String profilePhoto) {
         this.profilePhoto = profilePhoto;
+    }
+
+    @Transient
+    public String getPhotosImagePath() {
+        if (profilePhoto == null) return null;
+        return "/photos/recruiter/" + userAccountId + "/" + profilePhoto;
     }
 
     @Override

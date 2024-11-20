@@ -7,7 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class Users {
 
     @Id
@@ -26,7 +26,7 @@ public class Users {
     private Date registrationDate;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="userTypeId", referencedColumnName = "userTypeId")
+    @JoinColumn(name = "userTypeId", referencedColumnName = "userTypeId")
     private UsersType userTypeId;
 
     public Users() {
@@ -57,11 +57,11 @@ public class Users {
         this.email = email;
     }
 
-    public @NotEmpty String getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(@NotEmpty String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 

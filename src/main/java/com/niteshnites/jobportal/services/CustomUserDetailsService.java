@@ -1,9 +1,8 @@
 package com.niteshnites.jobportal.services;
 
 import com.niteshnites.jobportal.entity.Users;
-import com.niteshnites.jobportal.repository.UserRepository;
+import com.niteshnites.jobportal.repository.UsersRepository;
 import com.niteshnites.jobportal.util.CustomUserDetails;
-import jakarta.persistence.Access;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,17 +12,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
-    private final UserRepository userRepository;
+    private final UsersRepository usersRepository;
 
     @Autowired
-    public CustomUserDetailsService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public CustomUserDetailsService(UsersRepository usersRepository) {
+        this.usersRepository = usersRepository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Users users = userRepository.findByEmail(username)
-                .orElseThrow(() -> new UsernameNotFoundException("Could not found user"));
-        return new CustomUserDetails(users);
+        Users user = usersRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("Could not found user"));
+        return new CustomUserDetails(user);
     }
 }

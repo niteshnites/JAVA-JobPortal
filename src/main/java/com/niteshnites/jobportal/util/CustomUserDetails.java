@@ -12,7 +12,7 @@ import java.util.List;
 
 public class CustomUserDetails implements UserDetails {
 
-    private final Users user;
+    private Users user;
 
     public CustomUserDetails(Users user) {
         this.user = user;
@@ -43,7 +43,7 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
@@ -53,6 +53,6 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }
